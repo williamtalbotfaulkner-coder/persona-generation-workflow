@@ -1,0 +1,98 @@
+project: super_factory_openai
+model_family:
+  primary: z-image-base
+  fast: z-image-turbo
+
+character:
+  id: model_001
+  persona_file: personas/model_001/persona.md
+  references:
+    - personas/model_001/refs/ref_01.png
+    - personas/model_001/refs/ref_02.png
+    - personas/model_001/refs/ref_03.png
+
+identity:
+  fixed_identity_seed: 341122
+  ipadapter_weight: 0.82
+  consistency_notes:
+    - preserve facial structure
+    - preserve age band
+    - preserve skin tone
+
+lanes:
+  sfw:
+    one_off: 80
+    bundles:
+      - {count: 10, size: 3}
+      - {count: 10, size: 5}
+      - {count: 4, size: 10}
+  suggestive:
+    one_off: 80
+    bundles:
+      - {count: 10, size: 3}
+      - {count: 10, size: 5}
+      - {count: 4, size: 10}
+  spicy:
+    one_off: 80
+    bundles:
+      - {count: 10, size: 3}
+      - {count: 10, size: 5}
+      - {count: 4, size: 10}
+  nsfw:
+    one_off: 80
+    bundles:
+      - {count: 10, size: 3}
+      - {count: 10, size: 5}
+      - {count: 4, size: 10}
+
+prompt_slots:
+  identity_core: "<from persona parser>"
+  face_anchors: "high identity fidelity, natural asymmetry"
+  body_anchors: "realistic proportions, consistent body metrics"
+  wardrobe_by_lane: "<lane wardrobe rules>"
+  scene_context: "<location/time-of-day/context>"
+  lighting: "soft cinematic key light, natural falloff"
+  camera: "85mm portrait lens, realistic depth of field"
+  shot_intent: "<one-off|bundleN frame intent>"
+  realism_qualifiers: "photoreal skin texture, non-plastic rendering"
+  lane_rules: "<policy and lane constraints>"
+
+negative_global:
+  - waxy skin
+  - plastic cgi
+  - extra fingers
+  - malformed hands
+  - asymmetrical eyes
+  - text watermark
+  - logo artifacts
+
+render_profiles:
+  keyframe_quality:
+    checkpoint: z-image-base
+    resolution: [1024, 1536]
+    steps: 32
+    cfg: 5.2
+    sampler: dpmpp_2m_karras
+  volume_fast:
+    checkpoint: z-image-turbo
+    resolution: [832, 1216]
+    steps: 12
+    cfg: 3.1
+    sampler: dpmpp_2m_karras
+  refine:
+    latent_upscale: 1.75
+    refine_steps: 16
+
+output:
+  root: outputs/model_001
+  save_metadata: true
+  metadata_fields:
+    - character_id
+    - lane
+    - shot_type
+    - bundle_id
+    - frame_index
+    - seed
+    - checkpoint
+    - steps
+    - cfg

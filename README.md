@@ -112,3 +112,19 @@ max_number_of_memory = 3
     url={https://doi.org/10.1145/3643834.3660729},
     doi={10.1145/3643834.3660729}
  ```
+<br>
+
+## Super Factory - OpenAI Image Workflow Template
+
+For high-volume, high-consistency influencer image generation with ComfyUI, see:
+- [Master workflow template](./docs/super-factory-openai/master_workflow_template.md)
+- [Prompt manifest template](./docs/super-factory-openai/prompt_manifest_template.yaml)
+- [Target calculator script](./tools/calc_image_targets.py)
+
+This template is structured around a reusable single-workflow approach using `z-image-base` and `z-image-turbo`, with identity consistency from three reference images and lane-based production planning.
+
+### Super Factory Automation Agent
+
+For an end-to-end automation runner that queues ComfyUI jobs from a prompt table and writes a manifest, see:
+- [Agent runner blueprint](./docs/super-factory-openai/agent_runner.md)
+- [Agent runner skeleton](./tools/agent_runner.py)

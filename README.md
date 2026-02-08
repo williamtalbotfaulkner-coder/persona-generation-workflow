@@ -122,3 +122,9 @@ For high-volume, high-consistency influencer image generation with ComfyUI, see:
 - [Target calculator script](./tools/calc_image_targets.py)
 
 This template is structured around a reusable single-workflow approach using `z-image-base` and `z-image-turbo`, with identity consistency from three reference images and lane-based production planning.
+
+### Super Factory Automation Agent
+
+For an end-to-end automation runner that queues ComfyUI jobs from a prompt table and writes a manifest, see:
+- [Agent runner blueprint](./docs/super-factory-openai/agent_runner.md)
+- [Agent runner skeleton](./tools/agent_runner.py)
